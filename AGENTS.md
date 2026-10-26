@@ -43,7 +43,33 @@ with generated references, and JavaScript examples.
 - Keep skill references and knowledge guides consistent when changing
   behavior descriptions.
 - Never commit real credentials, tickets, session IDs, or host names.
-- Documentation language is English.
+- Always log errors that abort the program or the current operation with
+  their stack trace (e.g. `console.error(error)`, not only `error.message`).
+  Errors that are caught and handled intentionally need no stack trace.
+
+## Code documentation
+
+- Document all public classes, interfaces, functions, methods, and non-obvious
+  data structures with the language's conventions (JSDoc for the JavaScript
+  examples, docstrings for Python scripts).
+- Document parameters, return values, exceptions, and relevant side effects
+  where applicable.
+- Document properties and data fields when their purpose, constraints, or
+  semantics are not self-explanatory.
+- Explain non-obvious implementation decisions, business rules,
+  Indexserver-specific behavior, and workarounds with meaningful comments.
+- Avoid redundant comments that merely repeat what the code already expresses.
+- Prioritize documentation quality and maintainability over a fixed
+  comment-to-code ratio.
+- Use English names for classes, interfaces, functions, methods, variables,
+  and other identifiers, regardless of the language of the user's request.
+  Keep them consistent with the existing codebase and the OpenAPI definition.
+- Write log and error messages in English.
+- Write new code comments in the language of the user's request unless the
+  user specifies another language; fall back to English if it cannot be
+  determined. Markdown documentation stays in English.
+- Preserve the existing documentation language when modifying code unless the
+  user requests a change.
 
 ## Validation
 
@@ -54,5 +80,3 @@ python3 scripts/generate-api-docs.py --check
 python3 scripts/validate-skill.py
 scripts/validate-examples.sh
 ```
-
-CI runs the same checks in [.github/workflows/validate.yml](.github/workflows/validate.yml).

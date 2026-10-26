@@ -35,6 +35,7 @@ async function onInvokeRF() {
 		document.getElementById('resultObject').value = JSON.stringify(resultObject, null, 2);
 	}
 	catch (ex) {
+		console.error(ex);
 		alert(ex.message);
 	}
 

@@ -77,7 +77,7 @@ async function login(user, password, authMethod) {
 
 	}
 	catch (exception) {
-		console.dir(exception);
+		console.error(exception);
 		document.getElementById('login.ticket').value = exception.message;
 	}
 
