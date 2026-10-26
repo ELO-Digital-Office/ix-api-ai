@@ -16,25 +16,26 @@ with an ELO repository through the Indexserver REST API.
 
 ## Start here
 
-AI coding agents: read [SKILL.md](SKILL.md) before using the API references or
-writing code. It explains the repository's API patterns, authentication,
-metadata, searches, document uploads, and example conventions.
+AI coding agents: load the skill
+[skills/elo-indexserver-rest/SKILL.md](skills/elo-indexserver-rest/SKILL.md)
+before writing code. Agents working *on* this repository read
+[AGENTS.md](AGENTS.md).
 
-For a specific task, find a matching example in
-[examples/rest/javascript](examples/rest/javascript/). Check the API signature
-and data types in the references, then adapt the example to the target
-Indexserver version and environment.
+Developers: start with the [knowledge base](knowledge/README.md), then pick a
+matching example in [examples/rest](examples/rest/README.md). Check API
+signatures and data types in the generated references and adapt the example to
+the target Indexserver version and environment.
 
-## Repository contents
+## Repository layout
 
-| Resource | Description |
+| Path | Content |
 | --- | --- |
-| [SKILL.md](SKILL.md) | Instructions and practical patterns for AI coding agents working with the Indexserver REST API. |
-| [JavaScript REST examples](examples/rest/javascript/) | Runnable patterns for login, REST calls, documents, folders, metadata, search, references, and workflows. |
-| [REST API examples guide](examples/rest/index.md) | Example catalog, use cases, and guidance on when to use the examples. |
-| [OpenAPI reference](references/openapi.json) | Structured endpoint and operation definitions for the Indexserver REST API. |
-| [API operations](api.md) | Human-readable endpoint reference generated from the OpenAPI definition. |
-| [Data schemas](schema.md) | Human-readable Indexserver data type and schema reference. |
+| [skills/elo-indexserver-rest/](skills/elo-indexserver-rest/SKILL.md) | Agent skill: core rules and compact task references (authentication, documents, metadata, search, workflows) |
+| [knowledge/](knowledge/README.md) | Concepts, task guides, patterns, and troubleshooting |
+| [api/v25.0.1.5/](api/v25.0.1.5/openapi.json) | OpenAPI definition and generated [operations](api/v25.0.1.5/generated/operations.md) and [schemas](api/v25.0.1.5/generated/schemas.md) |
+| [examples/rest/](examples/rest/README.md) | JavaScript examples for browser and Node.js |
+| [scripts/](scripts/) | Documentation generator and validation scripts |
+| [.github/](.github/copilot-instructions.md) | Copilot instructions and CI workflow |
 
 ## Common tasks and examples
 
@@ -49,6 +50,20 @@ Indexserver version and environment.
 - **Move or reference repository objects:** [move-sord.js](examples/rest/javascript/move-sord.js) and [create-reference.js](examples/rest/javascript/create-reference.js)
 - **Start workflows, list and forward workflow tasks:** [workflow.js](examples/rest/javascript/workflow.js)
 
+## Common mistakes
+
+- **Mixing Gen1 and Gen2 metadata structures.** Use the structures of the
+  generation the target object uses; see
+  [Metadata Generations](knowledge/concepts/metadata-generations.md).
+- **Assuming a search returns all results at once.** Search results are paged;
+  continue until no more results are reported. See
+  [Pagination](knowledge/patterns/pagination.md).
+- **Leaving search resources open.** Close every search with `findClose` in a
+  `finally` block. See [Resource Cleanup](knowledge/patterns/resource-cleanup.md).
+- **Using unverified request fields.** Check operation and field names in
+  [operations.md](api/v25.0.1.5/generated/operations.md) and
+  [schemas.md](api/v25.0.1.5/generated/schemas.md) before sending a request.
+
 ## Search terms
 
 ELO Indexserver REST API, ELO REST API, ELO API examples, ELO AI coding
@@ -56,6 +71,18 @@ agent, ELO Indexserver client, ELO repository, Indexserver authentication,
 document upload, Sord metadata, Generation 1 metadata, Generation 2 aspects,
 Indexserver search, ELO workflow, start workflow, forward workflow task,
 JavaScript REST client.
+
+## Maintenance
+
+```bash
+python3 scripts/generate-api-docs.py          # regenerate api/*/generated/*.md
+python3 scripts/generate-api-docs.py --check  # fail if generated files are outdated
+python3 scripts/validate-skill.py             # skill front matter and Markdown links
+scripts/validate-examples.sh                  # syntax check of the JavaScript examples
+```
+
+To add an API version, create `api/<version>/openapi.json` and run the
+generator.
 
 ## Version and correctness
 
@@ -65,3 +92,7 @@ configuration-dependent behavior. Confirm endpoint availability, permissions,
 authentication settings, and data types against the target system before
 deploying an integration. Treat the examples as starting points and never
 commit real credentials or session tickets.
+
+## License
+
+[MIT](LICENSE)
