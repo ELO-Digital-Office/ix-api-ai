@@ -3,27 +3,71 @@
 Example: [metadata-gen2.js](../../examples/rest/javascript/metadata-gen2.js).
 Background: [Metadata generations](../concepts/metadata-generations.md).
 
-After login, loading `CONST`, and setting `config.parentId`:
+## Prerequisites
+
+Creating aspects and aspect masks requires:
+- Administrative rights
+- An existing package with configured package levels
+
+Create a package first with [package-gen2.js](../../examples/rest/javascript/package-gen2.js):
 
 ```javascript
-var sord = await createSordWithMetadataGen2();
+var packageData = await createPackage('MY_NAMESPACE', 'MyPackageName');
+```
+
+The package provides the namespace and levels into which aspects are organized.
+
+## Usage
+
+After login, loading `CONST`, setting `config.parentId`, and having a package:
+
+```javascript
+var packageData = await createPackage('MY_NAMESPACE', 'MyPackage');
+var docMask = await createMaskWithMetadataGen2(packageData, 'MyMaskName');
+var sord = await createSordWithMetadataGen2(docMask);
 console.log(sord.id, sord.aspects.RECHNUNGSPOSITION[1].PREIS.doubleValue);
 ```
 
 ## Steps in the example
 
-1. Create aspects with `createAspect` and `checkinAspect` (address with
-   `NAME`, `PLZ`, `ORT`; invoice position with `POS`, `ARTIKELNUMMER`,
-   `ARTIKELNAME`, `ANZAHL`, `PREIS`).
-2. Create associations with `createAspectAssoc`: `KUNDENADRESSE`
-   (`MANDATORY`) and `RECHNUNGSPOSITION` (`OPTIONAL_MANY`).
-3. Create the mask with `createAspectMask` and store it with `checkinDocMask`.
-4. `createSord` with the mask, fill `sord.aspects`, `checkinSord`.
-5. Check out with `CONST.LOCK.YES`, change a price, check in with
-   `unlockZ: CONST.LOCK.YES`, and verify the value `11.99`.
+### Step 1: Create a package (one-time)
 
-Creating aspects and masks requires administrative rights. The optional
-`maskName` argument must be unique; the default uses a timestamp.
+```javascript
+var packageData = await createPackage('INVOICE', 'InvoicePackage');
+```
+
+The package provides the namespace and predefined package levels (100, 400, 500, 900)
+into which aspects are organized.
+
+### Step 2: Create the mask and aspects
+
+```javascript
+var docMask = await createMaskWithMetadataGen2(packageData, 'InvoiceMask_' + Date.now());
+```
+
+The `createMaskWithMetadataGen2` function:
+
+1. Creates aspects with `createAspect` and `checkinAspect`:
+   - `ADRESSE` with fields `NAME`, `PLZ`, `ORT`
+   - `RECHNUNGSPOSITION` with fields `POS`, `ARTIKELNUMMER`, `ARTIKELNAME`, `ANZAHL`, `PREIS`
+2. Creates aspect associations with `createAspectAssoc`:
+   - `KUNDENADRESSE` (`MANDATORY`) — one customer address per Sord
+   - `RECHNUNGSPOSITION` (`OPTIONAL_MANY`) — multiple invoice positions per Sord
+3. Creates the mask with `createAspectMask` and stores it with `checkinDocMask`.
+
+### Step 3: Create a Sord using the mask
+
+```javascript
+var sord = await createSordWithMetadataGen2(docMask);
+```
+
+The `createSordWithMetadataGen2` function:
+
+1. Creates a Sord using `createSord` with the mask ID.
+2. Fills `sord.aspects` with customer address and invoice position data.
+3. Checks in the Sord with `checkinSord`.
+4. Checks out with `CONST.LOCK.YES`, updates a price, checks in with
+   `unlockZ: CONST.LOCK.YES`, and verifies the updated value `11.99`.
 
 ## Rules
 
