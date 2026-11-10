@@ -1,5 +1,14 @@
 # Code Documentation Conventions
 
+## Data models
+
+In generated applications, represent request, response, and domain data objects
+with the target language's typed model constructs, such as classes, structs, or
+records. Define models from the API schema types rather than using untyped JSON
+objects, maps, or dictionaries as the application's data model. Keep JSON
+handling at the serialization/deserialization boundary, and use dynamic JSON
+only for API fields whose contract explicitly allows arbitrary data.
+
 Document all public classes, interfaces, functions, methods, and non-obvious data structures with your language's standard conventions:
 
 - **JavaScript:** JSDoc (for examples)

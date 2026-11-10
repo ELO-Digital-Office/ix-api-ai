@@ -31,6 +31,10 @@ legacy APIs, ELO UI development, direct database access.
 9. Document generated client code as described in [code-conventions.md](references/code-conventions.md):
    doc comments on public types and methods (parameters, return values, exceptions),
    and comments for Indexserver-specific behavior and workarounds.
+10. In generated applications, represent request, response, and domain data with
+   typed models (classes, structs, records, or equivalent), not untyped JSON
+   objects or maps. Keep JSON handling at the serialization boundary or for
+   fields that are explicitly dynamic; see [code-conventions.md](references/code-conventions.md).
 
 ## Workflow for a task
 
