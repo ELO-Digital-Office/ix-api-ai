@@ -32,6 +32,7 @@ adaptation, in Node.js 18+ (`fetch`/`FormData` instead of `XMLHttpRequest`).
 | [write-map.js](javascript/write-map.js) | Map values, BLOBs, streams | `checkinMap`, `checkoutMap` | [Documents](../../knowledge/guides/documents.md) |
 | [metadata-gen1.js](javascript/metadata-gen1.js) | Gen1 mask and `objKeys` | `createDocMask`, `checkinDocMask` | [Metadata Gen1](../../knowledge/guides/metadata-gen1.md) |
 | [metadata-gen2.js](javascript/metadata-gen2.js) | Gen2 aspects and aspect mask | `createAspect`, `createAspectAssoc`, `createAspectMask` | [Metadata Gen2](../../knowledge/guides/metadata-gen2.md) |
+| [localization.js](javascript/localization.js) | Create and find translation terms | `checkinTranslateTerms`, `findFirstTranslateTerms`, `findNextTranslateTerms` | [Metadata Gen2](../../knowledge/guides/metadata-gen2.md) |
 | [find-loop.js](javascript/find-loop.js) | Paged search helper | `findFirstSords`, `findNextSords`, `findClose` | [Pagination](../../knowledge/patterns/pagination.md) |
 | [find-children.js](javascript/find-children.js) | Direct children | `findChildren` | [Search](../../knowledge/guides/search.md) |
 | [find-descendants.js](javascript/find-descendants.js) | All descendants | `findChildren.endLevel` | [Search](../../knowledge/guides/search.md) |

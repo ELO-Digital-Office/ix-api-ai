@@ -50,6 +50,23 @@ The `createMaskWithMetadataGen2` function:
 1. Creates aspects with `createAspect` and `checkinAspect`:
    - `ADRESSE` with fields `NAME`, `PLZ`, `ORT`
    - `RECHNUNGSPOSITION` with fields `POS`, `ARTIKELNUMMER`, `ARTIKELNAME`, `ANZAHL`, `PREIS`
+   
+   Each aspect line includes both **type** and **subtype**, using the
+   `AspectLineUIType` class and its predefined instances:
+   
+   ```javascript
+   // Example: ADRESSE aspect
+   var addressAspect = await createAspectGen2(packageData, level, 'ADRESSE', 'Address', 'Adresse', [
+       makeAspectLine(packageData, level, 'ADRESSE', 'NAME', ASPECT_LINE_UI_TYPE_TEXT, 'default', 'Name', 'Name', translateTerms),
+       makeAspectLine(packageData, level, 'ADRESSE', 'PLZ', ASPECT_LINE_UI_TYPE_TEXT, '00000', 'Postal code', 'Postleitzahl', translateTerms),
+       makeAspectLine(packageData, level, 'ADRESSE', 'ORT', ASPECT_LINE_UI_TYPE_TEXT, 'default', 'City', 'Ort', translateTerms)
+   ], translateTerms);
+   ```
+   
+   The `makeAspectLine` helper accepts an `AspectLineUIType` object and
+   automatically sets the correct `type` (from `ixTypeConstant`) and `subType`
+   properties on the aspect line.
+
 2. Creates aspect associations with `createAspectAssoc`:
    - `KUNDENADRESSE` (`MANDATORY`) — one customer address per Sord
    - `RECHNUNGSPOSITION` (`OPTIONAL_MANY`) — multiple invoice positions per Sord
@@ -79,6 +96,14 @@ The `createSordWithMetadataGen2` function:
 - Set `IndexValue.type` from `CONST.INDEXVALUE` and fill the matching
   `stringValue`, `intValue`, or `doubleValue`. Aspect line types come from
   `CONST.ASPECT_LINE`, a different set of constants.
+- **When generating aspect definitions programmatically, always assign both
+  the line type and line subtype** to each aspect line. Use the
+  `AspectLineUIType` class, which associates a type with its corresponding
+  subtype. Predefined instances (`ASPECT_LINE_UI_TYPE_TEXT`,
+  `ASPECT_LINE_UI_TYPE_INTEGER`, `ASPECT_LINE_UI_TYPE_DATE`, etc.) describe
+  which line type can be used with which subtype. Pass
+  `uiType.ixTypeConstant` as the line `type` and `uiType.subType` as the line
+  `subType`.
 - REST `createSord` returns `EditInfo`; use its `sord` property.
 - Pass IDs as strings (`String(aspectId)`).
 

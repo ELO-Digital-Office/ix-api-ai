@@ -1,7 +1,7 @@
 // Configuration object for the ELO REST API client.
 var config = {
 	// Indexserver URL
-	ixUrl: 'http://localhost:8080/ix-Repository1/ix',
+	ixUrl: 'http://localhost:9090/ix-Repository1/ix',
 	
 	// User name and password for Basic Authentication
 	loginUser: 'Administrator',

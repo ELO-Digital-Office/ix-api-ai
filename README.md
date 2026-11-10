@@ -18,7 +18,7 @@ with an ELO repository through the Indexserver REST API.
 
 AI coding agents: load the skill
 [skills/elo-indexserver-rest/SKILL.md](skills/elo-indexserver-rest/SKILL.md)
-before writing code. Agents working *on* this repository read
+before writing code. Agents working *on* this repository additionally read
 [AGENTS.md](AGENTS.md).
 
 Developers: start with the [knowledge base](knowledge/README.md), then pick a

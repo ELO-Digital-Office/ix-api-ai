@@ -1,8 +1,8 @@
 var config = {
    // Indexserver URL
-   baseUrl: "http://localhost:8084/ix-dev",
-   ixUrl: "http://localhost:8084/ix-dev" + "/ix",
-   restUrl: "http://localhost:8084/ix-dev" + "/rest/",
+   baseUrl: "http://localhost:9090/ix-Repository1",
+   ixUrl: "http://localhost:9090/ix-Repository1" + "/ix",
+   restUrl: "http://localhost:9090/ix-Repository1" + "/rest/",
 
    // Testuser
    loginUser: 'Administrator',

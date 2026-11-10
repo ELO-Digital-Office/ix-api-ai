@@ -49,7 +49,28 @@ sord.aspects.RECHNUNGSPOSITION = [{
 
 ### Create aspect model (administrative rights)
 
-1. `createAspect({ name, lines: [{ key, displayName, type, defaultValue }] })`
+When generating aspect definitions programmatically, **always assign both the
+line type and line subtype** to each aspect line. Use the `AspectLineUIType`
+class, which associates a type with its corresponding subtype. Predefined
+instances (`ASPECT_LINE_UI_TYPE_TEXT`, `ASPECT_LINE_UI_TYPE_INTEGER`, etc.)
+describe which line type can be used with which subtype:
+
+```javascript
+// Aspect line with both type and subtype via AspectLineUIType
+var lines = [
+	{
+		key: 'NAME',
+		displayName: 'Name',
+		type: ASPECT_LINE_UI_TYPE_TEXT.ixTypeConstant,    // the type
+		subType: ASPECT_LINE_UI_TYPE_TEXT.subType,         // the subtype
+		defaultValue: 'default'
+	}
+];
+```
+
+Steps to create aspects:
+
+1. `createAspect({ name, lines: [{ key, displayName, type, subType, defaultValue }] })`
    -> `checkinAspect({ aspect, aspectZ: CONST.ASPECT.mbAll, unlockZ: CONST.LOCK.NO })`
    -> `checkoutAspect({ aspectId: String(id), ... })`.
 2. `createAspectAssoc({ name, aspectId: String(id), cardinality })`.
@@ -58,3 +79,6 @@ sord.aspects.RECHNUNGSPOSITION = [{
 4. `createSord` with the new mask ID, fill `aspects`, `checkinSord`.
 
 Cleanup order: Sord -> mask (with associations) -> aspects.
+
+Display names of aspects, lines, associations, and masks are set through
+translation keys; see [localization.md](localization.md).

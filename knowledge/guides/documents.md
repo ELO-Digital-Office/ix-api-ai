@@ -128,7 +128,7 @@ with `checkoutDoc`. See [insert-doc-att.js](../../examples/rest/javascript/inser
 "docVersion": {
   "contentType": "text/plain",
   "fileData": { "stream": { "url": "getstream?serverid=0&messageid=0&streamid=3625747495282349347" } },
-  "url": "http://localhost:8084/ix-dev/ix?cmd=readdoc1&id=233&objid=429..."
+  "url": "http://localhost:9090/ix-Repository1/ix?cmd=readdoc1&id=233&objid=429..."
 }
 ```
 

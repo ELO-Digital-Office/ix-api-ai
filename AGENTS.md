@@ -49,25 +49,15 @@ with generated references, and JavaScript examples.
 
 ## Code documentation
 
-- Document all public classes, interfaces, functions, methods, and non-obvious
-  data structures with the language's conventions (JSDoc for the JavaScript
-  examples, docstrings for Python scripts).
-- Document parameters, return values, exceptions, and relevant side effects
-  where applicable.
-- Document properties and data fields when their purpose, constraints, or
-  semantics are not self-explanatory.
-- Explain non-obvious implementation decisions, business rules,
-  Indexserver-specific behavior, and workarounds with meaningful comments.
-- Avoid redundant comments that merely repeat what the code already expresses.
-- Prioritize documentation quality and maintainability over a fixed
-  comment-to-code ratio.
-- Use English names for classes, interfaces, functions, methods, variables,
-  and other identifiers, regardless of the language of the user's request.
-  Keep them consistent with the existing codebase and the OpenAPI definition.
-- Write log and error messages in English.
-- Write new code comments in the language of the user's request unless the
-  user specifies another language; fall back to English if it cannot be
-  determined. Markdown documentation stays in English.
+This repository follows the code documentation conventions documented in
+[skills/elo-indexserver-rest/references/code-conventions.md](skills/elo-indexserver-rest/references/code-conventions.md),
+which cover doc comment formats, Indexserver-specific behavior, identifiers,
+messages, and error logging.
+
+For repository-specific practices:
+- JavaScript examples use JSDoc for public functions and methods.
+- Python scripts use docstrings for public functions and classes.
+- Markdown documentation stays in English.
 - Preserve the existing documentation language when modifying code unless the
   user requests a change.
 

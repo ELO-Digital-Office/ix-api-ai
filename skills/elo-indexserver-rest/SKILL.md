@@ -1,6 +1,6 @@
 ---
 name: elo-indexserver-rest
-description: Write, review, and debug code that calls the ELO Indexserver (IX) REST API - login and session tickets, Sord folders and documents, file upload and download, Generation 1 index values (objKeys) and Generation 2 aspects, searches with findFirstSords/findNextSords, references, and workflows. Use when a task mentions ELO, Indexserver, IXServicePortIF, Sord, EditInfo, checkinSord, ELO repository, or ELO workflow.
+description: Write, review, and debug code that calls the ELO Indexserver (IX) REST API - login and session tickets, Sord folders and documents, file upload and download, Generation 1 index values (objKeys) and Generation 2 aspects, localization with translation keys and translation terms, searches with findFirstSords/findNextSords, references, and workflows. Use when a task mentions ELO, Indexserver, IXServicePortIF, Sord, EditInfo, checkinSord, ELO repository, or ELO workflow.
 ---
 
 # ELO Indexserver REST API
@@ -28,6 +28,9 @@ legacy APIs, ELO UI development, direct database access.
 7. Use the smallest selector that contains the needed members
    (`CONST.SORD.mbMin` for lists, `mbAll` to write).
 8. Never write real credentials, tickets, or session IDs into code or logs.
+9. Document generated client code as described in [code-conventions.md](references/code-conventions.md):
+   doc comments on public types and methods (parameters, return values, exceptions),
+   and comments for Indexserver-specific behavior and workarounds.
 
 ## Workflow for a task
 
@@ -47,6 +50,7 @@ legacy APIs, ELO UI development, direct database access.
 | Login, sessions, Bearer/Basic/cookie, constants | [authentication.md](references/authentication.md) | `login.js`, `rest-call.js`, `config.js` |
 | Folders, documents, upload/download, references, move, map data | [documents.md](references/documents.md) | `insert-folder.js`, `insert-document.js`, `insert-doc-att.js`, `insert-path.js`, `create-reference.js`, `move-sord.js`, `write-map.js` |
 | Gen1 masks and `objKeys`, Gen2 aspects | [metadata.md](references/metadata.md) | `metadata-gen1.js`, `metadata-gen2.js` |
+| Translation keys, localized display names, translation terms | [localization.md](references/localization.md) | `localization.js`, `metadata-gen2.js` |
 | Find children/descendants, full text, index, aspects | [search.md](references/search.md) | `find-loop.js`, `find-children.js`, `find-descendants.js`, `find-fulltext.js`, `find-metadata.js`, `find-aspects.js` |
 | Start workflows, find and forward tasks | [workflows.md](references/workflows.md) | `workflow.js` |
 
