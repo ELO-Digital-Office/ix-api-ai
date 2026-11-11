@@ -23,6 +23,7 @@ detailed explanations it refers to.
 | [folders.md](guides/folders.md) | Folders, paths, references, moving |
 | [metadata-gen1.md](guides/metadata-gen1.md) | Masks and `objKeys` |
 | [metadata-gen2.md](guides/metadata-gen2.md) | Aspects, aspect masks, typed values |
+| [prompt-examples.md](guides/prompt-examples.md) | Example prompts for AI coding agents |
 | [search.md](guides/search.md) | Children, descendants, ESearch, index and aspect search |
 | [workflows.md](guides/workflows.md) | Start workflows, find and forward tasks |
 
